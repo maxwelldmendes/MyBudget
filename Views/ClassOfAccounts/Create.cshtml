@@ -1,0 +1,56 @@
+@using MyBudget.ViewModel
+@model ClassOfAccountsViewModel
+
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2>Create Diary Entry</h2>
+                </div>
+                <div class="card-body">
+
+                    <form asp-controller="ClassOfAccounts" asp-action="Create" method="post">
+
+                        <div class="form-group mb-3" disabled>
+                            <label asp-for=" ClassOfAccounts.Id" class="form-label" disabled>Id</label>
+                            <input asp-for="ClassOfAccounts.Id" class="form-control"
+                                   placeholder="Enter an Id for the Class of Account" disabled />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="SubGroupId" class="form-label">Sub-group</label>
+
+                            <select asp-for="SubGroupId" asp-items="Model.SubGroups" class="form-select"
+                                    id="validationSubGroupId" required>
+                                <option value="">Choose a subgroup...</option>
+                            </select>
+
+                            <span asp-validation-for="SubGroupId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="ClassOfAccounts.ClassCode" class="form-label">Class Code</label>
+                            <input asp-for="ClassOfAccounts.ClassCode" class="form-control"
+                                   placeholder="Enter the Class Code" required />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="ClassOfAccounts.ClassDescription" class="form-label">Class
+                                Description</label>
+                                <input type="text" asp-for="ClassOfAccounts.ClassDescription" class="form-control"
+                                       placeholder="Enter the Class Description" />
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-primary">Create</button>
+                                <a asp-controller="ClassOfAccounts" asp-action="Index" class="btn btn-warning">Cancel</a>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
