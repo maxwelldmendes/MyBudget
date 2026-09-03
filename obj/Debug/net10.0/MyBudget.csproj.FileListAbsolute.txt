@@ -211,3 +211,4 @@ C:\Projetos\ProjetosCSharp\MyBudget\obj\Debug\net10.0\refint\MyBudget.dll
 C:\Projetos\ProjetosCSharp\MyBudget\obj\Debug\net10.0\MyBudget.pdb
 C:\Projetos\ProjetosCSharp\MyBudget\obj\Debug\net10.0\MyBudget.genruntimeconfig.cache
 C:\Projetos\ProjetosCSharp\MyBudget\obj\Debug\net10.0\ref\MyBudget.dll
+C:\Projetos\ProjetosCSharp\MyBudget\obj\Debug\net10.0\MyBudget.sourcelink.json

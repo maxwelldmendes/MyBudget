@@ -15,6 +15,6 @@ namespace MyBudget.Models
         public int SubGroupId { get; set; } = 0;
 
         // Navigation property for the related SubGroupOfAccounts entity.
-        public SubGroupOfAccounts? SubGroupOfAccounts { get; set; }
+        public SubGroupOfAccounts SubGroupOfAccounts { get; set; } = null!;
     }
 }
