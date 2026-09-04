@@ -17,6 +17,7 @@ namespace MyBudget.Controllers
             _db = db;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var classes = await _db.ClassesOfAccount
@@ -34,6 +35,7 @@ namespace MyBudget.Controllers
             return View(viewModel);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || id == 0)
@@ -56,10 +58,36 @@ namespace MyBudget.Controllers
             return View(classesViewModel);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            var classes = await _db.ClassesOfAccount.FindAsync(id);
+            if (classes == null)
+            {
+                return NotFound();
+            }
+
+            var classesViewModel = new ClassOfAccountsViewModel();
+            classesViewModel.Id = (int)id;
+            classesViewModel.SubGroupId = classes.SubGroupId;
+            classesViewModel.ClassCode = classes.ClassCode;
+            classesViewModel.ClassDescription = classes.ClassDescription;
+
+            await LoadSubGroupsAsync(classesViewModel);
+
+            return View(classesViewModel);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ClassOfAccountsViewModel viewModelObj)
         {
+
             // Check if the model state is valid
             if (!ModelState.IsValid)
             {
@@ -148,6 +176,41 @@ namespace MyBudget.Controllers
             try
             {
                 _db.ClassesOfAccount.Update(classesAccountObj);
+                await _db.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $"An error occurred while creating the class of accounts: {ex.Message}");
+                await LoadSubGroupsAsync(viewModelObj);
+                return View(viewModelObj);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(ClassOfAccountsViewModel viewModelObj)
+        {
+            // Check if the model state is valid
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError(string.Empty, "Please correct the errors and try again.");
+                await LoadSubGroupsAsync(viewModelObj);
+                return View(viewModelObj);
+            }
+
+            // Initialize the ClassOfAccounts object with the data from the view model
+            var classesAccountObj = new ClassOfAccounts
+            {
+                Id = viewModelObj.Id,
+                SubGroupId = viewModelObj.SubGroupId,
+                ClassCode = viewModelObj.ClassCode,
+                ClassDescription = viewModelObj.ClassDescription
+            };
+
+            try
+            {
+                _db.ClassesOfAccount.Remove(classesAccountObj);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
