@@ -4,66 +4,107 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - MyBudget</title>
+    <title>@ViewData["Title"] - teste</title>
     <script type="importmap"></script>
-    <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />-->
-    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/cerulean/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/MyBudget.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/teste.styles.css" asp-append-version="true" />
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary border-bottom box-shadow mb-3">
+        <nav
+            class="navbar navbar-expand-sm navbar-toggleable-sm navbar-primary bg-primary border-bottom box-shadow mb-3">
             <div class="container-fluid">
-
                 <a class="navbar-brand text-light" asp-area="" asp-controller="Home" asp-action="Index">My Budget
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                         class="bi bi-cash" viewBox="0 0 18 18">
-                        <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
-                        <path
-                        d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2z" />
-                    </svg>
                 </a>
-
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home"
-                               asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="ClassOfAccounts"
-                               asp-action="Index">Class of Accounts</a>
-                        </li>
-                    </ul>
-                </div>
 
-            </nav>
-        </header>
-        <div class="container">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
-        </div>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-light" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Company Center
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item text-light" asp-area="" asp-controller="GroupOfAccounts"
+                                           asp-action="Index">Group of Accounts</a></li>
+                                    <li><a class="dropdown-item text-light" href="#">Sub-Group of Accounts</a></li>
+                                    <li><a class="dropdown-item text-light" asp-area="" asp-controller="ClassOfAccounts"
+                                               asp-action="Index">Class of Accounts</a></li>
+                                    </ul>
+                                </li>
 
-        <footer class="border-top footer text-muted">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-light" role="button" data-bs-toggle="dropdown"
+                                       aria-expanded="false">
+                                        Customer Center
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item text-light" href="#">Action</a></li>
+                                        <li><a class="dropdown-item text-light" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item text-light" href="#">Something else here</a></li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-light" role="button" data-bs-toggle="dropdown"
+                                       aria-expanded="false">
+                                        Vendors Center
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item text-light" href="#">Action</a></li>
+                                        <li><a class="dropdown-item text-light" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item text-light" href="#">Something else here</a></li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-light" role="button" data-bs-toggle="dropdown"
+                                       aria-expanded="false">
+                                        Banking Center
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item text-light" href="#">Action</a></li>
+                                        <li><a class="dropdown-item text-light" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item text-light" href="#">Something else here</a></li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Home"
+                                       asp-action="Privacy">Privacy</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+
             <div class="container">
-                &copy; 2026 - MyBudget - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
             </div>
-        </footer>
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        @await RenderSectionAsync("Scripts", required: false)
-    </body>
 
-</html>
+            <!--footer class="footer border-top text-muted">
+                <div class="container">
+                    &copy; 2026 - teste - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </div>
+            </footer>-->
+
+            //
+            <script src="~/lib/jquery/dist/jquery.min.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+            @await RenderSectionAsync("Scripts", required: false)
+        </body>
+
+    </html>

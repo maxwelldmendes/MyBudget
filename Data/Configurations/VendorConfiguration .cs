@@ -23,7 +23,7 @@ namespace MyBudget.Data.Configurations
             builder.Property(e => e.Terms).HasMaxLength(50);
             builder.Property(e => e.CurrentBalance).HasColumnType("decimal(18,2)");
             builder.Property(e => e.IsActive).HasDefaultValue(true);
-            builder.Property(e => e.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
+            builder.Property(e => e.CreatedAt).HasColumnType("datetime").HasDefaultValueSql("GETDATE()");
 
             // Relationships
             builder.HasOne(v => v.BillingAddress)

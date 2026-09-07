@@ -1,0 +1,117 @@
+using System;
+using System.Collections.Generic;
+
+namespace FinancialTracking
+{
+    // 1. Transaction Base Class
+    public abstract class Transaction
+    {
+        public string TransactionId { get; } = Guid.NewGuid().ToString();
+        public DateTime Timestamp { get; } = DateTime.UtcNow;
+        public decimal Amount { get; set; }
+        public string Description { get; set; }
+        public TransactionType Type { get; set; } // Income or Expense
+
+        protected Transaction(decimal amount, string description, TransactionType type)
+        {
+            Amount = amount;
+            Description = description;
+            Type = type;
+        }
+
+        // Abstract method to force specific transaction logic
+        public abstract void Process();
+    }
+
+    public enum TransactionType
+    {
+        Income,
+        Expense
+    }
+
+    // 2. Cash Transaction Class
+    public class CashTransaction : Transaction
+    {
+        public string Location { get; set; }
+
+        public CashTransaction(decimal amount, string description, TransactionType type, string location = "Cash Wallet") 
+            : base(amount, description, type)
+        {
+            Location = location;
+        }
+
+        public override void Process()
+        {
+            // Logic for cash logging (e.g., updating physical wallet balance)
+            Console.WriteLine($"[CASH] {Type}: {Amount:C} for '{Description}' at {Location}.");
+        }
+    }
+
+    // 3. Card Transaction Class
+    public class CardTransaction : Transaction
+    {
+        public string CardNumberLastFour { get; set; }
+        public string MerchantName { get; set; }
+        public string AuthorizationCode { get; set; }
+
+        public CardTransaction(decimal amount, string description, TransactionType type, string cardLastFour, string merchant) 
+            : base(amount, description, type)
+        {
+            CardNumberLastFour = cardLastFour;
+            MerchantName = merchant;
+        }
+
+        public override void Process()
+        {
+            // Logic to connect with a payment gateway API (e.g., Stripe)
+            AuthorizationCode = "AUTH-" + new Random().Next(100000, 999999);
+            Console.WriteLine($"[CARD ****{CardNumberLastFour}] {Type}: {Amount:C} at {MerchantName}. AuthCode: {AuthorizationCode}");
+        }
+    }
+
+    // 4. Bank Transaction Class
+    public class BankTransaction : Transaction
+    {
+        public string AccountNumber { get; set; }
+        public string RoutingNumber { get; set; }
+        public string ReferenceNumber { get; set; }
+
+        public BankTransaction(decimal amount, string description, TransactionType type, string accountNumber, string routingNumber) 
+            : base(amount, description, type)
+        {
+            AccountNumber = accountNumber;
+            RoutingNumber = routingNumber;
+        }
+
+        public override void Process()
+        {
+            // Logic for ACH/Wire transfers or core banking Ledger updates
+            ReferenceNumber = "REF-" + Guid.NewGuid().ToString().Substring(0, 8).ToUpper();
+            Console.WriteLine($"[BANK Account {AccountNumber}] {Type}: {Amount:C}. Ref: {ReferenceNumber}");
+        }
+    }
+
+    // 5. Transaction Processor (The Controller)
+    public class TransactionProcessor
+    {
+        private readonly List<Transaction> _transactionHistory = new List<Transaction>();
+
+        public void ExecuteTransaction(Transaction transaction)
+        {
+            // Execute the polymorphic process method
+            transaction.Process();
+            
+            // Save to history ledger
+            _transactionHistory.Add(transaction);
+        }
+
+        public void PrintLedger()
+        {
+            Console.WriteLine("\n--- TRANSACTION HISTORY LOG ---");
+            foreach (var tx in _transactionHistory)
+            {
+                Console.WriteLine($"{tx.Timestamp:yyyy-MM-dd HH:mm} | {tx.GetType().Name} | {tx.Type} | {tx.Amount:C} | {tx.Description}");
+            }
+        }
+    }
+}

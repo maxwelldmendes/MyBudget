@@ -1,19 +1,19 @@
-@model List<MyBudget.Models.ClassOfAccounts>
+@model List<MyBudget.Models.GroupOfAccounts>
 
 <div class="container">
     <div class="row pt-4">
         <div class="col-6">
-            <a class="btn btn-primary btn-sm" asp-area="" asp-controller="ClassOfAccounts" asp-action="Create">
+            <a class="btn btn-primary btn-sm" asp-area="" asp-controller="GroupOfAccounts" asp-action="Create">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-folder-plus" viewBox="0 0 18 18">
                     <path
                     d="m.5 3 .04.87a2 2 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2m5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19q-.362.002-.683.12L1.5 2.98a1 1 0 0 1 1-.98z" />
                     <path
                     d="M13.5 9a.5.5 0 0 1 .5.5V11h1.5a.5.5 0 1 1 0 1H14v1.5a.5.5 0 1 1-1 0V12h-1.5a.5.5 0 0 1 0-1H13V9.5a.5.5 0 0 1 .5-.5" />
-                </svg> Add a new Class of Account </a>
+                </svg> Add a new Group of Account </a>
             </div>
             <div class="col-6 text-end">
-                <h2>Class of Accounts</h2>
+                <h2>Group of Accounts</h2>
             </div>
         </div>
     </div>
@@ -23,35 +23,39 @@
             <thead class="table-light">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Sub-group</th>
-                    <th scope="col">Class Code</th>
-                    <th scope="col">Class Description</th>
+                    <th scope="col">Group Description</th>
+                    <th scope="col">Group Code</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
+
             <tbody>
-                @foreach (var classes in Model)
+                @foreach (var groups in Model)
                 {
                     <tr>
-                        <td>@classes.Id</td>
-                        <td>@classes.SubGroupOfAccounts.SubGroupDescription</td>
-                        <td>@classes.ClassCode</td>
-                        <td>@classes.ClassDescription</td>
+                        <td>@groups.Id</td>
+                        <td>@groups.GroupDescription</td>
+                        <td>@groups.GroupInformation</td>
                         <td>
-                            <a asp-controller="ClassOfAccounts" asp-action="Edit" asp-route-id="@classes.Id"
+                            <a asp-controller="GroupOfAccounts" asp-action="Edit" asp-route-id="@groups.Id"
                                class="btn btn-primary btn-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                      class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                    <path
-                                    d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
+                                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 
+                                    9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 
+                                    0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 
+                                    0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
                                 </svg>
                                 Edit</a>
-                                <a asp-controller="ClassOfAccounts" asp-action="Delete" asp-route-id="@classes.Id"
+                                <a asp-controller="GroupOfAccounts" asp-action="Delete" asp-route-id="@groups.Id"
                                    class="btn btn-danger btn-sm">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                          class="bi bi-trash3-fill" viewBox="0 0 16 16">
                                         <path
-                                        d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
+                                        d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 
+                                        3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 
+                                        0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 
+                                        0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
                                     </svg>
                                     Delete</a>
                                 </td>
@@ -60,3 +64,4 @@
                     </tbody>
                 </table>
             </div>
+        

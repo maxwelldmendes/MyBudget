@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MyBudget.Migrations
 {
     /// <inheritdoc />
-    public partial class NovasTabelas : Migration
+    public partial class Initialmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,21 +30,35 @@ namespace MyBudget.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "GroupOfAccounts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    GroupDescription = table.Column<string>(type: "TEXT", maxLength: 150, nullable: false),
+                    GroupInformation = table.Column<string>(type: "TEXT", maxLength: 500, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GroupOfAccounts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
                 {
                     CustomerId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     QuickbooksId = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    CompanyName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     DisplayName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    CompanyName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     FirstName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
                     LastName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
                     Email = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     Phone = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
                     CurrentBalance = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IsActive = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: true),
-                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "GETUTCDATE()"),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "GETDATE()"),
                     BillingAddressId = table.Column<int>(type: "INTEGER", nullable: true),
                     ShippingAddressId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
@@ -84,7 +98,7 @@ namespace MyBudget.Migrations
                     CurrentBalance = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Terms = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
                     IsActive = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: true),
-                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "GETUTCDATE()"),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "GETDATE()"),
                     BillingAddressId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
@@ -96,6 +110,26 @@ namespace MyBudget.Migrations
                         principalTable: "Addresses",
                         principalColumn: "AddressId",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SubGroupOfAccounts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    SubGroupDescription = table.Column<string>(type: "TEXT", maxLength: 150, nullable: false),
+                    GroupId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SubGroupOfAccounts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SubGroupOfAccounts_GroupOfAccounts_GroupId",
+                        column: x => x.GroupId,
+                        principalTable: "GroupOfAccounts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -149,6 +183,27 @@ namespace MyBudget.Migrations
                         column: x => x.VendorId,
                         principalTable: "Vendors",
                         principalColumn: "VendorId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ClassesOfAccount",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ClassCode = table.Column<string>(type: "TEXT", nullable: false),
+                    ClassDescription = table.Column<string>(type: "TEXT", nullable: false),
+                    SubGroupId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClassesOfAccount", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ClassesOfAccount_SubGroupOfAccounts_SubGroupId",
+                        column: x => x.SubGroupId,
+                        principalTable: "SubGroupOfAccounts",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -209,6 +264,11 @@ namespace MyBudget.Migrations
                 column: "VendorId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ClassesOfAccount_SubGroupId",
+                table: "ClassesOfAccount",
+                column: "SubGroupId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Customers_BillingAddressId",
                 table: "Customers",
                 column: "BillingAddressId");
@@ -229,6 +289,11 @@ namespace MyBudget.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_SubGroupOfAccounts_GroupId",
+                table: "SubGroupOfAccounts",
+                column: "GroupId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Vendors_BillingAddressId",
                 table: "Vendors",
                 column: "BillingAddressId");
@@ -241,16 +306,25 @@ namespace MyBudget.Migrations
                 name: "BillLineItems");
 
             migrationBuilder.DropTable(
+                name: "ClassesOfAccount");
+
+            migrationBuilder.DropTable(
                 name: "InvoiceLineItems");
 
             migrationBuilder.DropTable(
                 name: "Bills");
 
             migrationBuilder.DropTable(
+                name: "SubGroupOfAccounts");
+
+            migrationBuilder.DropTable(
                 name: "Invoices");
 
             migrationBuilder.DropTable(
                 name: "Vendors");
+
+            migrationBuilder.DropTable(
+                name: "GroupOfAccounts");
 
             migrationBuilder.DropTable(
                 name: "Customers");

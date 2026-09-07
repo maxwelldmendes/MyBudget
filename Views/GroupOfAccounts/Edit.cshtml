@@ -1,0 +1,46 @@
+@using MyBudget.ViewModel
+@model GroupOfAccountsViewModel
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2>Update Group of Accounts</h2>
+                </div>
+
+                <div class="card-body">
+                    <form asp-controller="GroupOfAccounts" asp-action="Edit" method="post">
+
+                        <div asp-validation-summary="All" class="text-danger">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="GroupDescription" class="form-label">Group Description</label>
+                            <input asp-for="GroupDescription" class="form-control"
+                                   placeholder="Enter the Group Description" required />
+                            <span asp-validation-for="GroupDescription" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="GroupInformation" class="form-label">Group Information</label>
+                            <input asp-for="GroupInformation" class="form-control"
+                                   placeholder="Enter the Group Information" required />
+                            <span asp-validation-for="GroupInformation" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-primary">Apply Changes</button>
+                            <a asp-controller="GroupOfAccounts" asp-action="Index" class="btn btn-warning">Cancel</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -16,7 +16,7 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
         builder.Property(e => e.Phone).HasMaxLength(20);
         builder.Property(e => e.CurrentBalance).HasColumnType("decimal(18,2)");
         builder.Property(e => e.IsActive).HasDefaultValue(true);
-        builder.Property(e => e.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
+        builder.Property(e => e.CreatedAt).HasColumnType("datetime").HasDefaultValueSql("GETDATE()");
 
         // Relationships
         builder.HasOne(c => c.BillingAddress)

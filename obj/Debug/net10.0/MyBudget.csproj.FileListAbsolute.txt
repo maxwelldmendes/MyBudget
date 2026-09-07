@@ -136,7 +136,6 @@ C:\Projetos\ProjetosCSharp\MyBudget\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
 C:\Projetos\ProjetosCSharp\MyBudget\obj\Debug\net10.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Projetos\ProjetosCSharp\MyBudget\obj\Debug\net10.0\scopedcss\bundle\MyBudget.styles.css
 C:\Projetos\ProjetosCSharp\MyBudget\obj\Debug\net10.0\scopedcss\projectbundle\MyBudget.bundle.scp.css
-C:\Projetos\ProjetosCSharp\MyBudget\obj\Debug\net10.0\compressed\4j1n0f4f3c-{0}-b9sayid5wm-b9sayid5wm.gz
 C:\Projetos\ProjetosCSharp\MyBudget\obj\Debug\net10.0\compressed\dby3pk5hbi-{0}-61n19gt1b8-61n19gt1b8.gz
 C:\Projetos\ProjetosCSharp\MyBudget\obj\Debug\net10.0\compressed\bvfhxnga9v-{0}-xtxxf3hu2r-xtxxf3hu2r.gz
 C:\Projetos\ProjetosCSharp\MyBudget\obj\Debug\net10.0\compressed\u3uut3opvq-{0}-bqjiyaj88i-bqjiyaj88i.gz
@@ -212,3 +211,4 @@ C:\Projetos\ProjetosCSharp\MyBudget\obj\Debug\net10.0\MyBudget.pdb
 C:\Projetos\ProjetosCSharp\MyBudget\obj\Debug\net10.0\MyBudget.genruntimeconfig.cache
 C:\Projetos\ProjetosCSharp\MyBudget\obj\Debug\net10.0\ref\MyBudget.dll
 C:\Projetos\ProjetosCSharp\MyBudget\obj\Debug\net10.0\MyBudget.sourcelink.json
+C:\Projetos\ProjetosCSharp\MyBudget\obj\Debug\net10.0\compressed\4j1n0f4f3c-{0}-eb75zd0gaq-eb75zd0gaq.gz
