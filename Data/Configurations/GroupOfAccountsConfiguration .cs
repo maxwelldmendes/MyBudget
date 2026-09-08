@@ -21,10 +21,10 @@ namespace MyBudget.Data.Configurations
                    .HasMaxLength(500); // Set an explicit max length suitable for detailed information
 
             // Relationship Configuration
-            builder.HasMany(g => g.SubGroupsOfAccounts)
+            builder.HasMany(g => g.SubGroups)
                    .WithOne(s => s.GroupOfAccounts) // Assumes SubGroupOfAccounts has a reference property back to GroupOfAccounts
                    .HasForeignKey(s => s.GroupId) // Assumes SubGroupOfAccounts has a matching foreign key property
-                   .OnDelete(DeleteBehavior.Cascade); // Deleting a group will delete its sub-groups
+                   .OnDelete(DeleteBehavior.Restrict); // Deleting a group will delete its sub-groups
         }
     }
 }

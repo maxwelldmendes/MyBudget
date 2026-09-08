@@ -36,75 +36,76 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item text-light" asp-area="" asp-controller="GroupOfAccounts"
                                            asp-action="Index">Group of Accounts</a></li>
-                                    <li><a class="dropdown-item text-light" href="#">Sub-Group of Accounts</a></li>
-                                    <li><a class="dropdown-item text-light" asp-area="" asp-controller="ClassOfAccounts"
-                                               asp-action="Index">Class of Accounts</a></li>
-                                    </ul>
-                                </li>
+                                    <li><a class="dropdown-item text-light" asp-area="" asp-controller="SubgroupOfAccounts"
+                                               asp-action="Index">Sub-Group of Accounts</a></li>
+                                        <li><a class=" dropdown-item text-light" asp-area="" asp-controller="ClassOfAccounts"
+                                                   asp-action="Index">Class of Accounts</a></li>
+                                        </ul>
+                                    </li>
 
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle text-light" role="button" data-bs-toggle="dropdown"
-                                       aria-expanded="false">
-                                        Customer Center
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item text-light" href="#">Action</a></li>
-                                        <li><a class="dropdown-item text-light" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item text-light" href="#">Something else here</a></li>
-                                    </ul>
-                                </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle text-light" role="button" data-bs-toggle="dropdown"
+                                           aria-expanded="false">
+                                            Customer Center
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item text-light" href="#">Action</a></li>
+                                            <li><a class="dropdown-item text-light" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item text-light" href="#">Something else here</a></li>
+                                        </ul>
+                                    </li>
 
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle text-light" role="button" data-bs-toggle="dropdown"
-                                       aria-expanded="false">
-                                        Vendors Center
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item text-light" href="#">Action</a></li>
-                                        <li><a class="dropdown-item text-light" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item text-light" href="#">Something else here</a></li>
-                                    </ul>
-                                </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle text-light" role="button" data-bs-toggle="dropdown"
+                                           aria-expanded="false">
+                                            Vendors Center
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item text-light" href="#">Action</a></li>
+                                            <li><a class="dropdown-item text-light" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item text-light" href="#">Something else here</a></li>
+                                        </ul>
+                                    </li>
 
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle text-light" role="button" data-bs-toggle="dropdown"
-                                       aria-expanded="false">
-                                        Banking Center
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item text-light" href="#">Action</a></li>
-                                        <li><a class="dropdown-item text-light" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item text-light" href="#">Something else here</a></li>
-                                    </ul>
-                                </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle text-light" role="button" data-bs-toggle="dropdown"
+                                           aria-expanded="false">
+                                            Banking Center
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item text-light" href="#">Action</a></li>
+                                            <li><a class="dropdown-item text-light" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item text-light" href="#">Something else here</a></li>
+                                        </ul>
+                                    </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" asp-area="" asp-controller="Home"
-                                       asp-action="Privacy">Privacy</a>
-                                </li>
-                            </ul>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light" asp-area="" asp-controller="Home"
+                                           asp-action="Privacy">Privacy</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </nav>
-            </header>
+                    </nav>
+                </header>
 
-            <div class="container">
-                <main role="main" class="pb-3">
-                    @RenderBody()
-                </main>
-            </div>
+                <div class="container">
+                    <main role="main" class="pb-3">
+                        @RenderBody()
+                    </main>
+                </div>
 
-            <!--footer class="footer border-top text-muted">
+                <!--footer class="footer border-top text-muted">
                 <div class="container">
                     &copy; 2026 - teste - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                 </div>
             </footer>-->
 
-            //
-            <script src="~/lib/jquery/dist/jquery.min.js"></script>
-            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-            <script src="~/js/site.js" asp-append-version="true"></script>
-            @await RenderSectionAsync("Scripts", required: false)
-        </body>
+                //
+                <script src="~/lib/jquery/dist/jquery.min.js"></script>
+                <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="~/js/site.js" asp-append-version="true"></script>
+                @await RenderSectionAsync("Scripts", required: false)
+            </body>
 
-    </html>
+        </html>

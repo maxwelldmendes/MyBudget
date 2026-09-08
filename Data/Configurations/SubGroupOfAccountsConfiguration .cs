@@ -8,6 +8,7 @@ namespace MyBudget.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<SubGroupOfAccounts> builder)
         {
+
             // Primary Key Configuration
             builder.HasKey(s => s.Id);
 
@@ -16,17 +17,20 @@ namespace MyBudget.Data.Configurations
                    .IsRequired()
                    .HasMaxLength(150); // Set an explicit max length suitable for a description
 
+            builder.Property(x => x.GroupId)
+                    .IsRequired();
+
             // Relationship: Many SubGroups belong to One Group
             builder.HasOne(s => s.GroupOfAccounts)
-                   .WithMany(g => g.SubGroupsOfAccounts)
+                   .WithMany(g => g.SubGroups)
                    .HasForeignKey(s => s.GroupId) // Maps directly to your GroupId field
-                   .OnDelete(DeleteBehavior.Cascade); // Deleting a Group deletes its SubGroups
+                   .OnDelete(DeleteBehavior.Restrict); // Deleting a Group deletes its SubGroups
 
             // Relationship: One SubGroup has Many Classes
             builder.HasMany(s => s.ClassesOfAccounts)
                    .WithOne(c => c.SubGroupOfAccounts) // Assumes ClassOfAccounts has a reference property back
                    .HasForeignKey(c => c.SubGroupId) // Assumes ClassOfAccounts uses SubGroupId as a foreign key
-                   .OnDelete(DeleteBehavior.Cascade);
+                   .OnDelete(DeleteBehavior.Restrict); // 
         }
     }
 }

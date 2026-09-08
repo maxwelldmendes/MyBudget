@@ -1,5 +1,7 @@
 
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
+
 
 namespace MyBudget.Models
 {
@@ -11,7 +13,8 @@ namespace MyBudget.Models
         public int GroupId { get; set; }
 
         // Navigation properties
-        public virtual GroupOfAccounts GroupOfAccounts { get; set; } = null!;
+        public GroupOfAccounts GroupOfAccounts { get; set; } = new GroupOfAccounts();
+
         public virtual ICollection<ClassOfAccounts> ClassesOfAccounts { get; set; } = new List<ClassOfAccounts>();
     }
 }

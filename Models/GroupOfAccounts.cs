@@ -9,6 +9,6 @@ namespace MyBudget.Models
         public string GroupInformation { get; set; } = string.Empty;
 
         // Navigation property for the related SubGroupOfAccounts entities.
-        public virtual ICollection<SubGroupOfAccounts> SubGroupsOfAccounts { get; set; } = new List<SubGroupOfAccounts>();
+        public virtual ICollection<SubGroupOfAccounts> SubGroups { get; set; } = new List<SubGroupOfAccounts>();
     }
 }
