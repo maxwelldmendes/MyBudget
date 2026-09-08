@@ -8,11 +8,11 @@ using Microsoft.Extensions.Logging;
 
 namespace MyBudget.Views.SubGroupOfAccounts
 {
-    public class Edit : PageModel
+    public class Delete : PageModel
     {
-        private readonly ILogger<Edit> _logger;
+        private readonly ILogger<Delete> _logger;
 
-        public Edit(ILogger<Edit> logger)
+        public Delete(ILogger<Delete> logger)
         {
             _logger = logger;
         }

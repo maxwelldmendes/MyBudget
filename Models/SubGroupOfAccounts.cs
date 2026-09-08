@@ -13,7 +13,7 @@ namespace MyBudget.Models
         public int GroupId { get; set; }
 
         // Navigation properties
-        public GroupOfAccounts GroupOfAccounts { get; set; } = new GroupOfAccounts();
+        public virtual GroupOfAccounts GroupOfAccounts { get; set; } = null!;
 
         public virtual ICollection<ClassOfAccounts> ClassesOfAccounts { get; set; } = new List<ClassOfAccounts>();
     }

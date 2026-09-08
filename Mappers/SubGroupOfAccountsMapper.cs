@@ -23,9 +23,9 @@ namespace MyBudget.Mappers
             subGroupVM.SubGroupDescription = subGroup.SubGroupDescription;
             subGroupVM.GroupId = subGroup.GroupId;
 
-            subGroupVM.GroupOfAccountsVM.Id = subGroup.GroupOfAccounts.Id;
-            subGroupVM.GroupOfAccountsVM.GroupDescription = subGroup.GroupOfAccounts.GroupDescription;
-            subGroupVM.GroupOfAccountsVM.GroupInformation = subGroup.GroupOfAccounts.GroupInformation;
+            //subGroupVM.Groups.Id = subGroup.GroupOfAccounts.Id;
+            ///subGroupVM.Groups.GroupDescription = subGroup.GroupOfAccounts.GroupDescription;
+            //subGroupVM.Groups.GroupInformation = subGroup.GroupOfAccounts.GroupInformation;
         }
 
 

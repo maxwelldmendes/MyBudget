@@ -1,19 +1,14 @@
-
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
-
-namespace MyBudget.ViewModel
+public class SubGroupOfAccountsViewModel
 {
-    public class SubGroupOfAccountsViewModel
-    {
-        public int Id { get; set; }
-        public string SubGroupDescription { get; set; } = string.Empty;
-        // Foreign key for the Group entity.   
-        public int GroupId { get; set; }
+    [Required]
+    public int Id { get; set; }
+    [Required]
+    public string SubGroupDescription { get; set; } = string.Empty;
+    [Required]
+    public int GroupId { get; set; }
 
-        // Navigation properties
-        public GroupOfAccountsViewModel GroupOfAccountsVM { get; set; } = new GroupOfAccountsViewModel();
-
-        public virtual ICollection<ClassOfAccountsViewModel> ClassesOfAccounts { get; set; } = new List<ClassOfAccountsViewModel>();
-    }
+    public IEnumerable<SelectListItem> Groups { get; set; } = Enumerable.Empty<SelectListItem>();
 }

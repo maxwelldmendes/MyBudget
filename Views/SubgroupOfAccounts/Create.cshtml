@@ -7,11 +7,11 @@
         <div class="col-md-8 offset-md-2">
             <div class="card">
                 <div class="card-header bg-primary text-white text-center">
-                    <h2>Edit Sug-group of Accounts</h2>
+                    <h2>Add Sug-group of Accounts</h2>
                 </div>
 
                 <div class="card-body">
-                    <form asp-controller="SubGroupOfAccounts" asp-action="Edit" method="post">
+                    <form asp-controller="SubgroupOfAccounts" asp-action="Create" method="post">
                         @Html.AntiForgeryToken()
 
                         <input asp-for="Id" type="hidden" />
@@ -31,13 +31,15 @@
 
                             <select asp-for="GroupId" asp-items="Model.Groups" class="form-select"
                                     id="validationSubGroupId" required>
+
                                 <option value="">Select a group...</option>
                             </select>
                             <span asp-validation-for="GroupId" class="text-danger"></span>
+
                         </div>
 
                         <div class="d-flex justify-content-between">
-                            <button type="submit" class="btn btn-primary">Apply Changes</button>
+                            <button type="submit" class="btn btn-primary">Apply</button>
                             <a asp-controller="SubGroupOfAccounts" asp-action="Index" class="btn btn-warning">Cancel</a>
                         </div>
 
@@ -47,7 +49,3 @@
         </div>
     </div>
 </div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
