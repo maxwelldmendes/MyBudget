@@ -11,8 +11,8 @@ using MyBudget.Data;
 namespace MyBudget.Migrations
 {
     [DbContext(typeof(AppMyBudgetContext))]
-    [Migration("20260906161453_Initial migration")]
-    partial class Initialmigration
+    [Migration("20260908225713_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,9 +20,67 @@ namespace MyBudget.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.11");
 
+            modelBuilder.Entity("Company", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CompanyAddressId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("LegalAddressId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("LegalName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("MetaDataCreateTime")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<DateTime>("MetaDataLastUpdatedTime")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<string>("PrimaryEmailAddress")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PrimaryPhone")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("WebAddress")
+                        .IsRequired()
+                        .HasMaxLength(2048)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyAddressId")
+                        .IsUnique();
+
+                    b.HasIndex("LegalAddressId")
+                        .IsUnique();
+
+                    b.ToTable("Company");
+                });
+
             modelBuilder.Entity("MyBudget.Models.Address", b =>
                 {
-                    b.Property<int>("AddressId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -37,11 +95,6 @@ namespace MyBudget.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("TEXT")
                         .HasDefaultValue("USA");
-
-                    b.Property<string>("PostalCode")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("State")
                         .IsRequired()
@@ -58,7 +111,12 @@ namespace MyBudget.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
-                    b.HasKey("AddressId");
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Addresses");
                 });
@@ -440,6 +498,25 @@ namespace MyBudget.Migrations
                     b.ToTable("Vendors");
                 });
 
+            modelBuilder.Entity("Company", b =>
+                {
+                    b.HasOne("MyBudget.Models.Address", "CompanyAddress")
+                        .WithOne()
+                        .HasForeignKey("Company", "CompanyAddressId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("MyBudget.Models.Address", "LegalAddress")
+                        .WithOne()
+                        .HasForeignKey("Company", "LegalAddressId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("CompanyAddress");
+
+                    b.Navigation("LegalAddress");
+                });
+
             modelBuilder.Entity("MyBudget.Models.Bill", b =>
                 {
                     b.HasOne("MyBudget.Models.Vendor", "Vendor")
@@ -467,7 +544,7 @@ namespace MyBudget.Migrations
                     b.HasOne("MyBudget.Models.SubGroupOfAccounts", "SubGroupOfAccounts")
                         .WithMany("ClassesOfAccounts")
                         .HasForeignKey("SubGroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("SubGroupOfAccounts");
@@ -515,9 +592,9 @@ namespace MyBudget.Migrations
             modelBuilder.Entity("MyBudget.Models.SubGroupOfAccounts", b =>
                 {
                     b.HasOne("MyBudget.Models.GroupOfAccounts", "GroupOfAccounts")
-                        .WithMany("SubGroupsOfAccounts")
+                        .WithMany("SubGroups")
                         .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("GroupOfAccounts");
@@ -545,7 +622,7 @@ namespace MyBudget.Migrations
 
             modelBuilder.Entity("MyBudget.Models.GroupOfAccounts", b =>
                 {
-                    b.Navigation("SubGroupsOfAccounts");
+                    b.Navigation("SubGroups");
                 });
 
             modelBuilder.Entity("MyBudget.Models.Invoice", b =>

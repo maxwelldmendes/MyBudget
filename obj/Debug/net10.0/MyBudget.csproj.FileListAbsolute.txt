@@ -212,3 +212,4 @@ C:\Projetos\ProjetosCSharp\MyBudget\obj\Debug\net10.0\compressed\lrlv7m3cu8-{0}-
 C:\Projetos\ProjetosCSharp\MyBudget\obj\Debug\net10.0\compressed\vnxmh89on2-{0}-qlccset4i1-qlccset4i1.gz
 C:\Projetos\ProjetosCSharp\MyBudget\obj\Debug\net10.0\compressed\j6q8dciwzq-{0}-xzw0cte36n-xzw0cte36n.gz
 C:\Projetos\ProjetosCSharp\MyBudget\obj\Debug\net10.0\compressed\uzmkl7a4cs-{0}-jfsiqqwiad-jfsiqqwiad.gz
+C:\Projetos\ProjetosCSharp\MyBudget\obj\Debug\net10.0\compressed\dyi77d7yf9-{0}-7jmg0vn7cn-7jmg0vn7cn.gz

@@ -1,0 +1,153 @@
+@using MyBudget.ViewModel
+@model CompanyViewModel
+
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4>Add Company</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-controller="Company" asp-action="Create" method="post">
+
+                        <div asp-validation-summary="All" class="text-danger"></div>
+
+                        <div class="form-group mb-1">
+                            <label asp-for="CompanyName" class="form-label-sm">Company Name</label>
+                            <input asp-for="CompanyName" class="form-control form-control-sm"
+                                   placeholder="Enter the Company Name!" />
+                            <span asp-validation-for="CompanyName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-1">
+                            <label asp-for="LegalName" class="form-label-sm">Legal Name</label>
+                            <input asp-for="LegalName" class="form-control form-control-sm"
+                                   placeholder="Enter the Legal Name!" />
+                        </div>
+                        <div class="form-group mb-1">
+                            <label asp-for="PrimaryEmailAddress" class="form-label-sm">eMail Address</label>
+                            <input asp-for="PrimaryEmailAddress" class="form-control form-control-sm"
+                                   placeholder="Enter the eMail!" />
+                        </div>
+                        <div class="form-group mb-1">
+                            <label asp-for="PrimaryPhone" class="form-label-sm">Phone Number</label>
+                            <input asp-for="PrimaryPhone" class="form-control form-control-sm"
+                                   placeholder="Enter the Phone Number!" />
+                        </div>
+                        <div class="form-group mb-1">
+                            <label asp-for="WebAddress" class="form-label-sm">Web Address</label>
+                            <input asp-for="WebAddress" class="form-control form-control-sm"
+                                   placeholder="Enter the Web Address!" />
+                        </div>
+                        <!------------------------------------------------------------------------------------------------------------>
+                        <div class="row g-4 mb-4">
+                            <!-- Endereço da empresa -->
+                            <div class="col-12 col-md-6">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-header bg-primary">
+                                        <h2 class="h5 mb-0 text-center text-light">Company Address</h2>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div class="form-group mb-3">
+                                            <label asp-for="CompanyAddress.Street1" class="form-label-sm">Address
+                                                Line 1</label>
+                                                <input asp-for="CompanyAddress.Street1" class="form-control form-control-sm"
+                                                       placeholder="Enter the Address!" />
+                                        </div>
+                                        <div class="form-group mb-3">
+                                                <label asp-for="CompanyAddress.Street2" class="form-label-sm">Address
+                                                    Line
+                                                    2</label>
+                                                    <input asp-for="CompanyAddress.Street2" class="form-control form-control-sm"
+                                                           placeholder="Enter the Address!" />
+
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label asp-for="CompanyAddress.City" class="form-label-sm">City</label>
+                                            <input asp-for="CompanyAddress.City" class="form-control form-control-sm"
+                                                    placeholder="Enter the Address!" />
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label asp-for="CompanyAddress.State" class="form-label-sm">State</label>
+                                            <input asp-for="CompanyAddress.State" class="form-control form-control-sm"
+                                                    placeholder="Enter the Address!" />
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label asp-for="CompanyAddress.ZipCode" class="form-label-sm">Zip
+                                                Code</label>
+                                                <input asp-for="CompanyAddress.ZipCode" class="form-control form-control-sm"
+                                                        placeholder="Enter the Address!" />
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label asp-for="CompanyAddress.Country"
+                                                    class="form-label-sm">Country</label>
+                                            <input asp-for="CompanyAddress.Country" class="form-control form-control-sm"
+                                                    placeholder="Enter the Address!" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Endereço da empresa -->
+                            <div class="col-12 col-md-6">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-header bg-primary">
+                                        <h2 class="h5 mb-0 text-center text-light">Legal Address</h2>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div class="form-group mb-3">
+                                            <label asp-for="LegalAddress.Street1" class="form-label-sm">Address
+                                                Line 1</label>
+                                                <input asp-for="LegalAddress.Street1" class="form-control form-control-sm"
+                                                       placeholder="Enter the Address!" />
+                                        </div>
+                                        <div class="form-group mb-3">
+                                                <label asp-for="LegalAddress.Street2" class="form-label-sm">Address
+                                                    Line
+                                                    2</label>
+                                                    <input asp-for="LegalAddress.Street2" class="form-control form-control-sm"
+                                                           placeholder="Enter the Address!" />
+
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label asp-for="LegalAddress.City" class="form-label-sm">City</label>
+                                            <input asp-for="LegalAddress.City" class="form-control form-control-sm"
+                                                    placeholder="Enter the Address!" />
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label asp-for="LegalAddress.State" class="form-label-sm">State</label>
+                                            <input asp-for="LegalAddress.State" class="form-control form-control-sm"
+                                                    placeholder="Enter the Address!" />
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label asp-for="LegalAddress.ZipCode" class="form-label-sm">Zip
+                                                Code</label>
+                                                <input asp-for="LegalAddress.ZipCode" class="form-control form-control-sm"
+                                                        placeholder="Enter the Address!" />
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label asp-for="LegalAddress.Country"
+                                                    class="form-label-sm">Country</label>
+                                            <input asp-for="LegalAddress.Country" class="form-control form-control-sm"
+                                                    placeholder="Enter the Address!" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-primary">Create</button>
+                            <a asp-controller="Company" asp-action="Index" class="btn btn-warning">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

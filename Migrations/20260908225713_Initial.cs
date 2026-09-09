@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MyBudget.Migrations
 {
     /// <inheritdoc />
-    public partial class Initialmigration : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,18 +15,18 @@ namespace MyBudget.Migrations
                 name: "Addresses",
                 columns: table => new
                 {
-                    AddressId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Street1 = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     Street2 = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     City = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
                     State = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    PostalCode = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
+                    ZipCode = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
                     Country = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false, defaultValue: "USA")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Addresses", x => x.AddressId);
+                    table.PrimaryKey("PK_Addresses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -41,6 +41,39 @@ namespace MyBudget.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_GroupOfAccounts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Company",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CompanyName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    LegalName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    PrimaryEmailAddress = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    PrimaryPhone = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
+                    WebAddress = table.Column<string>(type: "TEXT", maxLength: 2048, nullable: false),
+                    MetaDataCreateTime = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "GETDATE()"),
+                    MetaDataLastUpdatedTime = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "GETDATE()"),
+                    CompanyAddressId = table.Column<int>(type: "INTEGER", nullable: false),
+                    LegalAddressId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Company", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Company_Addresses_CompanyAddressId",
+                        column: x => x.CompanyAddressId,
+                        principalTable: "Addresses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Company_Addresses_LegalAddressId",
+                        column: x => x.LegalAddressId,
+                        principalTable: "Addresses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -69,13 +102,13 @@ namespace MyBudget.Migrations
                         name: "FK_Customers_Addresses_BillingAddressId",
                         column: x => x.BillingAddressId,
                         principalTable: "Addresses",
-                        principalColumn: "AddressId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Customers_Addresses_ShippingAddressId",
                         column: x => x.ShippingAddressId,
                         principalTable: "Addresses",
-                        principalColumn: "AddressId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -108,7 +141,7 @@ namespace MyBudget.Migrations
                         name: "FK_Vendors_Addresses_BillingAddressId",
                         column: x => x.BillingAddressId,
                         principalTable: "Addresses",
-                        principalColumn: "AddressId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -129,7 +162,7 @@ namespace MyBudget.Migrations
                         column: x => x.GroupId,
                         principalTable: "GroupOfAccounts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -204,7 +237,7 @@ namespace MyBudget.Migrations
                         column: x => x.SubGroupId,
                         principalTable: "SubGroupOfAccounts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -269,6 +302,18 @@ namespace MyBudget.Migrations
                 column: "SubGroupId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Company_CompanyAddressId",
+                table: "Company",
+                column: "CompanyAddressId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Company_LegalAddressId",
+                table: "Company",
+                column: "LegalAddressId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Customers_BillingAddressId",
                 table: "Customers",
                 column: "BillingAddressId");
@@ -307,6 +352,9 @@ namespace MyBudget.Migrations
 
             migrationBuilder.DropTable(
                 name: "ClassesOfAccount");
+
+            migrationBuilder.DropTable(
+                name: "Company");
 
             migrationBuilder.DropTable(
                 name: "InvoiceLineItems");

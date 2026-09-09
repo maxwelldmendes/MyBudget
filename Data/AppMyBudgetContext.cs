@@ -11,6 +11,7 @@ namespace MyBudget.Data
         public AppMyBudgetContext(DbContextOptions<AppMyBudgetContext> options) : base(options)
         { }
 
+        public DbSet<Company> Company { get; set; }
         public DbSet<ClassOfAccounts> ClassesOfAccount { get; set; }
         public DbSet<GroupOfAccounts> GroupOfAccounts { get; set; }
         public DbSet<SubGroupOfAccounts> SubGroupOfAccounts { get; set; }
