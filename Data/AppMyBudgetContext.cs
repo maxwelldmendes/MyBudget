@@ -12,9 +12,9 @@ namespace MyBudget.Data
         { }
 
         public DbSet<Company> Company { get; set; }
-        public DbSet<ClassOfAccounts> ClassesOfAccount { get; set; }
         public DbSet<GroupOfAccounts> GroupOfAccounts { get; set; }
         public DbSet<SubGroupOfAccounts> SubGroupOfAccounts { get; set; }
+        public DbSet<ClassOfAccounts> ClassesOfAccount { get; set; }
         public DbSet<Vendor> Vendors { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Address> Addresses { get; set; }

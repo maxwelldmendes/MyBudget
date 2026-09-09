@@ -11,7 +11,7 @@ using MyBudget.Data;
 namespace MyBudget.Migrations
 {
     [DbContext(typeof(AppMyBudgetContext))]
-    [Migration("20260908225713_Initial")]
+    [Migration("20260909165443_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

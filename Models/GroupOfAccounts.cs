@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace MyBudget.Models
 {
     public class GroupOfAccounts
